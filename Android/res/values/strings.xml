@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Currency Jamaica</string>
+    <string name="action_settings">Settings</string>
+    <string name="usd">USD</string>
+    <string name="gbp">GBP</string>
+    <string name="cad">CAD</string>
+    <string name="eur">EUR</string>
+
+    <string name="trader">Trader</string>
+    <string name="buying">Buying</string>
+    <string name="selling">Selling</string>
+    <string name="enterAmount">Enter Amount</string>
+    
+    <string name="action_change_screen">Change Theme</string>
+</resources>
