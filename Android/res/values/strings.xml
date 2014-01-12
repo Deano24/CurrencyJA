@@ -14,4 +14,8 @@
     <string name="enterAmount">Enter Amount</string>
     
     <string name="action_change_screen">Change Theme</string>
+    
+    <string name="disclaimer">Disclaimer: Exchange rates are subject to change without notice by each institution. This data is for informational use only.</string>
+    <string name="info_open_source_an">An </string>
+    <string name="info_open_source_project">"Project By: "</string>
 </resources>

@@ -7,8 +7,13 @@ import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
@@ -16,6 +21,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	private ActionBar actionBar;
 	private ViewPager viewPager;
+	private ConnectivityManager mConnectivityManager;
 	private String[] tabNames = { "USD", "GBP", "CAD", "EUR" };
 	private SharedPreferences chosenTheme;
 	private static final String THEME = "THEME";
@@ -25,7 +31,22 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		chosenTheme = getSharedPreferences("currenncyThemes", MODE_PRIVATE);
+		mConnectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+		boolean notConnection = true;
+		if(mConnectivityManager!=null)
+        {
+            NetworkInfo[] info = mConnectivityManager.getAllNetworkInfo();
+            if (info != null){
+            	for (int i = 0; i < info.length; i++){
+                	if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                		notConnection = false;
+                        break;
+                    }
+                }
+            }
+        }
+	    chosenTheme = getSharedPreferences("currenncyThemes", MODE_PRIVATE);
 		selectedTheme = chosenTheme.getInt(THEME, 0);
 		switch(selectedTheme){
 			case R.style.AppDarkTheme:
@@ -45,6 +66,16 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		setContentView(R.layout.activity_main);
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		viewPager.setOffscreenPageLimit(4);
+		if(notConnection){
+			new AlertDialog.Builder(this)
+		    .setTitle("Internet Connectivity")
+		    .setMessage("No internet connection could be found.")
+		    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+		    	public void onClick(DialogInterface dialog, int which) {}
+            })
+		     .show();
+			return;
+		}
 		viewPager.setAdapter(new TabAdapter(getSupportFragmentManager()));
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
 

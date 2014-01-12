@@ -795,6 +795,7 @@ containing a value of this type.
     
          */
         public static final int activity_horizontal_margin=0x7f07000f;
+        public static final int activity_pad_left=0x7f070011;
         public static final int activity_vertical_margin=0x7f070010;
     }
     public static final class drawable {
@@ -953,14 +954,17 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f04003d;
+        public static final int action_settings=0x7f040040;
         public static final int amountEditText=0x7f040037;
         public static final int buyingPlaceTextView=0x7f040034;
         public static final int buyingTextView=0x7f040039;
+        public static final int deanoTextView=0x7f04003f;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040026;
         public static final int homeAsUp=0x7f040006;
         public static final int itemsLinearLayout=0x7f04003c;
+        public static final int kenrickTextView=0x7f04003e;
+        public static final int lastUpdated=0x7f04003d;
         public static final int listMode=0x7f040002;
         public static final int normal=0x7f040001;
         public static final int pager=0x7f040032;
@@ -1058,9 +1062,12 @@ containing a value of this type.
         public static final int app_name=0x7f09000d;
         public static final int buying=0x7f090014;
         public static final int cad=0x7f090011;
+        public static final int disclaimer=0x7f090018;
         public static final int enterAmount=0x7f090016;
         public static final int eur=0x7f090012;
         public static final int gbp=0x7f090010;
+        public static final int info_open_source_an=0x7f090019;
+        public static final int info_open_source_project=0x7f09001a;
         public static final int selling=0x7f090015;
         public static final int trader=0x7f090013;
         public static final int usd=0x7f09000f;

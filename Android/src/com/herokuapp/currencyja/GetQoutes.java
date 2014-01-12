@@ -32,6 +32,8 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	private static final String TAG_BUYING = "buying";
 	private static final String TAG_Selling = "selling";
 	private static final String TAG_CURRENCIES = "currencies";
+	private static final String UPDATE_TIME = "updated_at";
+	private TextView updateTime;
 	private ArrayList<Pair< Pair< Pair<String,String>, String>, String> > qoutes;
 
 	public GetQoutes(){
@@ -42,6 +44,9 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	}
 	public void setInflator(LayoutInflater inflater){
 		this.inflater = inflater;
+	}
+	public void setUpdatedTextView(TextView updated){
+		this.updateTime = updated;
 	}
 
 	public void setItemsLayout(LinearLayout itemsLinearLayout){
@@ -113,6 +118,7 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
                 for (int i = 0; i < jsonArr.length(); i++) {
                     JSONObject innerObject = jsonArr.getJSONObject(i);
                     String id = innerObject.getString(TAG_ID);
+                    //String updateTime = innerObject.getString(UPDATE_TIME);
                     String traderName = innerObject.getString(TAG_NAME).toUpperCase(Locale.getDefault());
                     JSONObject currencies = innerObject.getJSONObject(TAG_CURRENCIES);
                     try{

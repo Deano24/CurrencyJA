@@ -21,6 +21,7 @@
 
 	<LinearLayout
 	    android:layout_width="match_parent"
+	    android:paddingLeft="@dimen/activity_pad_left"
 	    android:layout_height="wrap_content" >
 
 		<TextView
@@ -64,5 +65,34 @@
 
 	    </LinearLayout>
 	</ScrollView>
+
+	<TextView
+	    android:id="@+id/lastUpdated"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	     />
+
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:gravity="center"
+	    android:paddingTop="@dimen/activity_pad_left"
+	    android:layout_height="wrap_content"
+	    android:text="@string/disclaimer" />
+
+	<TextView
+	    android:id="@+id/kenrickTextView"
+	    android:gravity="center"
+	    android:paddingTop="@dimen/activity_pad_left"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    />
+
+	<TextView
+	    android:id="@+id/deanoTextView"
+	    android:gravity="center"
+	    android:layout_width="fill_parent"
+	    android:paddingTop="@dimen/activity_pad_left"
+	    android:layout_height="wrap_content"
+	     />
 
 </LinearLayout>
