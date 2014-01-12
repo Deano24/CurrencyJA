@@ -61,6 +61,7 @@ public class CADFragment extends Fragment {
 		GetQoutes qoutes = new GetQoutes();
 		qoutes.setTagCode(TAG_CODE);
 		qoutes.setAmountText(amountEditText);
+		qoutes.setContext(getActivity());
 		qoutes.setItemsLayout(itemsLinearLayout);
 		qoutes.setInflator(inflater);
 		qoutes.execute();

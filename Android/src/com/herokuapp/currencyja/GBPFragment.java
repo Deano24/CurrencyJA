@@ -60,6 +60,7 @@ public class GBPFragment extends Fragment {
 	public void updateList(LayoutInflater inflater){
 		GetQoutes qoutes = new GetQoutes();
 		qoutes.setTagCode(TAG_CODE);
+		qoutes.setContext(getActivity());
 		qoutes.setAmountText(amountEditText);
 		qoutes.setItemsLayout(itemsLinearLayout);
 		qoutes.setInflator(inflater);

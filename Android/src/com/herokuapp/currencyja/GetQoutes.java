@@ -1,13 +1,19 @@
 package com.herokuapp.currencyja;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,9 +38,12 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	private static final String TAG_BUYING = "buying";
 	private static final String TAG_Selling = "selling";
 	private static final String TAG_CURRENCIES = "currencies";
-	private static final String UPDATE_TIME = "updated_at";
-	private TextView updateTime;
+	private Context cont;
 	private ArrayList<Pair< Pair< Pair<String,String>, String>, String> > qoutes;
+	private static boolean dialogShouldShow = false;
+	private static boolean dialogHasShown = false;
+	private static boolean dialogShouldShowError = false;
+	private static boolean dialogHasShownError = false;
 
 	public GetQoutes(){
         qoutes = new ArrayList<Pair< Pair< Pair<String,String>, String>, String> >();
@@ -45,8 +54,8 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	public void setInflator(LayoutInflater inflater){
 		this.inflater = inflater;
 	}
-	public void setUpdatedTextView(TextView updated){
-		this.updateTime = updated;
+	public void setContext(Context cont){
+		this.cont = cont;
 	}
 
 	public void setItemsLayout(LinearLayout itemsLinearLayout){
@@ -112,13 +121,15 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	protected Void doInBackground(Void... params) {
 		ServiceHandler sh = new ServiceHandler();
         String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+        Log.d("jsonStr",jsonStr); 
         if (jsonStr != null) {
             try {
+            	dialogShouldShow = false;
+            	dialogHasShown = false;
             	JSONArray jsonArr = new JSONArray(jsonStr);
                 for (int i = 0; i < jsonArr.length(); i++) {
                     JSONObject innerObject = jsonArr.getJSONObject(i);
                     String id = innerObject.getString(TAG_ID);
-                    //String updateTime = innerObject.getString(UPDATE_TIME);
                     String traderName = innerObject.getString(TAG_NAME).toUpperCase(Locale.getDefault());
                     JSONObject currencies = innerObject.getJSONObject(TAG_CURRENCIES);
                     try{
@@ -138,21 +149,50 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	                    Pair<Pair<String,String>, String> pairName = new Pair<Pair<String,String>, String>(pairRates,traderName);
 	                    Pair< Pair< Pair<String,String>, String>, String> pairId = new Pair< Pair< Pair<String,String>, String>, String>(pairName,id);
 	                    qoutes.add(pairId);
+	                    dialogShouldShowError = false;
+	                    dialogHasShownError = false;
                     }catch(Exception ex){
                     	continue;
                     }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                dialogShouldShowError = true;
             }
         } else {
             Log.e("ServiceHandler", "Couldn't get any data from the url");
+            dialogShouldShow = true;
         }
 		return null;
 	}
+	
 	@Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
+        if(dialogShouldShow){
+        	if(!dialogHasShown){
+        		new AlertDialog.Builder(this.cont)
+	    	    .setTitle("Error")
+	    	    .setMessage("We are sorry but there seems to be an error with connecting to our server please try again later.")
+	    	    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+	    	    	public void onClick(DialogInterface dialog, int which) {}
+	            })
+		     .show();
+        		dialogHasShown = true;
+        	}
+        }
+        if(dialogShouldShowError){
+        	if(!dialogHasShownError){
+        		new AlertDialog.Builder(this.cont)
+	    	    .setTitle("Error")
+	    	    .setMessage("We are sorry but an error has occurred in our application we apologize for the inconvenience.")
+	    	    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+	    	    	public void onClick(DialogInterface dialog, int which) {}
+	            })
+		     .show();
+        		dialogHasShownError = true;
+        	}
+        }
         for(Pair< Pair< Pair<String,String>, String>, String> qoute : qoutes){
 			View placeInfo = inflater.inflate(R.layout.currency_info, null);
 			TextView name = (TextView) placeInfo.findViewById(R.id.placeNameTextView);

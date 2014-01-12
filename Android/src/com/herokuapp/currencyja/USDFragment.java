@@ -26,7 +26,6 @@ public class USDFragment extends Fragment {
 	private final static String DEANO_URL = "https://github.com/Deano24/";
 	private LinearLayout itemsLinearLayout;
 	private EditText amountEditText;
-	private TextView updateTime;
 	private static final String TAG_CODE = "usd";
 	public USDFragment() {
 	}
@@ -51,7 +50,6 @@ public class USDFragment extends Fragment {
 		Linkify.addLinks(openSource, Pattern.compile("Kenrick Beckett"),KENRICK_NAME_URL,null,filter);
 	    Linkify.addLinks(deanoOwn, Pattern.compile("Rohan Malcolm"),DEANO_URL,null,filter);
 		itemsLinearLayout = (LinearLayout)localView.findViewById(R.id.itemsLinearLayout);
-		updateTime = (TextView)localView.findViewById(R.id.lastUpdated);
 		amountEditText = (EditText)localView.findViewById(R.id.amountEditText);
 		updateList(inflater);
 		return localView;
@@ -60,9 +58,9 @@ public class USDFragment extends Fragment {
 	public void updateList(LayoutInflater inflater){
 		GetQoutes qoutes = new GetQoutes();
 		qoutes.setTagCode(TAG_CODE);
+		qoutes.setContext(getActivity());
 		qoutes.setAmountText(amountEditText);
 		qoutes.setItemsLayout(itemsLinearLayout);
-		qoutes.setUpdatedTextView(updateTime);
 		qoutes.setInflator(inflater);
 		qoutes.execute();
 	}
