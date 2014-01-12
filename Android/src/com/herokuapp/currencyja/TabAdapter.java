@@ -4,11 +4,23 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+/**
+ * 
+ * @author Deano
+ * TabAdapter to deal with switching of tabs extends FragmentPagerAdapter to aid with switching
+ *
+ */
 public class TabAdapter extends FragmentPagerAdapter {
 	private USDFragment usdFrag;
 	private GBPFragment gbpFrag;
 	private CADFragment cadFrag;
 	private EURFragment eurFrag;
+	
+	/**
+	 * constructor from the extended class, also instantiates each fragment
+	 * 
+	 * @param fm
+	 */
 	public TabAdapter(FragmentManager fm) {
 		super(fm);
 		usdFrag = new USDFragment();
@@ -17,8 +29,11 @@ public class TabAdapter extends FragmentPagerAdapter {
 		eurFrag = new EURFragment();
 	}
 	
-	
-
+	/**
+	 * getter that gets item based on index
+	 * 
+	 * @param index the index being changed to
+	 */
 	@Override
 	public Fragment getItem(int index) {
 		// TODO Auto-generated method stub
@@ -35,6 +50,9 @@ public class TabAdapter extends FragmentPagerAdapter {
 		return null;
 	}
 
+	/**
+	 * total amount of tabs that will be there
+	 */
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub

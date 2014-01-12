@@ -17,6 +17,13 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
+/**
+ * 
+ * @author Deano
+ * the main class that runs the application extends sherlock fragment so as to add support for tab 
+ * swipping in older phones
+ *
+ */
 public class MainActivity extends SherlockFragmentActivity implements TabListener {
 
 	private ActionBar actionBar;
@@ -28,6 +35,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	private int selectedTheme;
 	private int[] listOfThemes = {R.style.AppSherlockTheme,R.style.AppDarkTheme,R.style.AppLightTheme};
 	
+	/**
+	 * called the time the app is created each time or when orientation is changed
+	 * 
+	 * @param savedInstanceState all saved informations that is related to the game
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,23 +117,48 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         }
 	}
 
+	/**
+	 * function that is called when tab is selected, used to set the view to the selected tab
+	 * 
+	 * @param tab the tab that was clicked
+	 * @param ft the fragment transaction/operations.
+	 */
 	@Override
 	public void onTabSelected(Tab tab,
 			android.support.v4.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		viewPager.setCurrentItem(tab.getPosition());
 	}
-
+	
+	/**
+	 * function called when you leave a tab
+	 * 
+	 * @param tab the tab that was left
+	 * @param ft the fragment transaction/operations.
+	 */
 	@Override
 	public void onTabUnselected(Tab tab,
 			android.support.v4.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 	}
+	
+	/**
+	 * this function is called when you are on a tab and select back the same tab
+	 * 
+	 * @param tab the tab that was clicked
+	 * @param ft the fragment transaction/operations.
+	 */
 	@Override
 	public void onTabReselected(Tab tab,
 			android.support.v4.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 	}
+	
+	/**
+	 * function that creates the menu options
+	 * 
+	 * @param menu a menu object
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -129,6 +166,10 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		return true;
 	}
 	
+	/**
+	 * the click event for menu items
+	 * @param item the menu item that was clicked
+	 */
 	/*@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
@@ -140,6 +181,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 			return false;
 	}*/
 	
+	/**
+	 * function that changes theme to next available theme -->currently commented out due to errors
+	 */
 	public void changeTheme(){
 		SharedPreferences.Editor preferencesEditor = chosenTheme.edit();
 		//Log.d("theme","changing theme "+selectedTheme);

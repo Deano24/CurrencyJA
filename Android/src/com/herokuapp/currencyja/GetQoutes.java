@@ -1,10 +1,7 @@
 package com.herokuapp.currencyja;
 
-import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -25,6 +22,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * 
+ * @author Deano
+ * class that gets quotes and displays them in layout
+ *
+ */
 public class GetQoutes extends AsyncTask<Void, Void, Void>{
 
 	private LinearLayout itemsLinearLayout;
@@ -45,22 +48,60 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	private static boolean dialogShouldShowError = false;
 	private static boolean dialogHasShownError = false;
 
+	/**
+	 * 
+	 * Constructor. instantiates list of qoutes
+	 * 
+	 */
 	public GetQoutes(){
         qoutes = new ArrayList<Pair< Pair< Pair<String,String>, String>, String> >();
 	}
+	
+	/**
+	 * sets tag code to be used
+	 * 
+	 * @param tagCode the tag code to be used eg: usd, gbp
+	 */
 	public void setTagCode(String tagCode){
 		this.tagCode = tagCode;
 	}
+	
+	/**
+	 * 
+	 * the inflater that will be used to inflate all objects and layouts
+	 * 
+	 * @param inflater inflater that will be used
+	 */
 	public void setInflator(LayoutInflater inflater){
 		this.inflater = inflater;
 	}
+	
+	/**
+	 * 
+	 * sets the context that will be used to show the alert dialog boxes
+	 * 
+	 * @param cont the context to be used
+	 */
 	public void setContext(Context cont){
 		this.cont = cont;
 	}
 
+	/**
+	 * 
+	 * LinearLayout that all quotes will be placed in
+	 * 
+	 * @param itemsLinearLayout the layout to be used
+	 */
 	public void setItemsLayout(LinearLayout itemsLinearLayout){
 		this.itemsLinearLayout = itemsLinearLayout;
 	}
+	
+	/**
+	 * 
+	 * sets the textbox that will be used for updating and doing calculations on the qoutes
+	 * 
+	 * @param amountText link to text box
+	 */
 	public void setAmountText(EditText amountText){
 		this.amountEditText = amountText;
 		this.amountEditText.addTextChangedListener(new TextWatcher(){
@@ -117,6 +158,11 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 		});
 	}
 
+	/**
+	 * 
+	 * task that runs in background to connect to host and gets quotes
+	 * 
+	 */
 	@Override
 	protected Void doInBackground(Void... params) {
 		ServiceHandler sh = new ServiceHandler();
@@ -166,6 +212,12 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * function called after the doInBackground is completed this is where i etiher show the dialog or
+	 * updating the linear layout
+	 * 
+	 */
 	@Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);

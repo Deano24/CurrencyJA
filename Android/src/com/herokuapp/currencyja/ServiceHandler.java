@@ -17,20 +17,42 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-
+/**
+ * 
+ * @author Deano
+ *
+ *ServiceHandler class that actually runs the http request and can either be GET or POST
+ */
 public class ServiceHandler {
 	static String response = null;
     public final static int GET = 1;
     public final static int POST = 2;
  
+    /**
+     * Constructor
+     */
     public ServiceHandler() {
  
     }
  
+    /**
+     * calls the makeServiceCall that actually does the function
+     * @param url
+     * @param method
+     * @return a string that will contain the result of the makeServiceCall
+     */
     public String makeServiceCall(String url, int method) {
         return this.makeServiceCall(url, method, null);
     }
  
+    /**
+     * makes http request to server to pull data from json
+     * 
+     * @param url
+     * @param method
+     * @param params
+     * @return the string that is the result of the http request
+     */
     public String makeServiceCall(String url, int method,List<NameValuePair> params) {
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();

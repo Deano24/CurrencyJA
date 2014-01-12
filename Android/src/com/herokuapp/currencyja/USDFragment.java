@@ -16,7 +16,8 @@ import android.widget.TextView;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
- * 
+ * @author Deano
+ * Fragment for us amount USD
  */
 public class USDFragment extends Fragment {
 	private final static String OPEN_SOURCE = "An Open Source Project By: Kenrick Beckett.";
@@ -27,8 +28,24 @@ public class USDFragment extends Fragment {
 	private LinearLayout itemsLinearLayout;
 	private EditText amountEditText;
 	private static final String TAG_CODE = "usd";
+	
+	/**
+	 * Constructor
+	 */
 	public USDFragment() {
 	}
+	
+	/**
+	 * onCreateView called only once when the fragment is instantiated while 
+	 * onCreate on the other hand is called every-time the view comes on screen
+	 * 
+	 * @param inflater the LayoutInflater to inflate each layout
+	 * @param container the ViewGroup that all belongs to
+	 * @param savedInstanceState saved state for the application
+	 * 
+	 * @return the view that should be rendered
+	 * 
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -55,6 +72,12 @@ public class USDFragment extends Fragment {
 		return localView;
 	}
 	
+	/**
+	 * 
+	 * Create a new instance of GetQoutes to get all quotes
+	 * 
+	 * @param inflater inflater to be passed to getQoutes
+	 */
 	public void updateList(LayoutInflater inflater){
 		GetQoutes qoutes = new GetQoutes();
 		qoutes.setTagCode(TAG_CODE);
