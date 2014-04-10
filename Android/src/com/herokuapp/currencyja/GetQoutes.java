@@ -38,8 +38,8 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	private static final String TAG_NAME = "name";
 	private static final String TAG_ID = "id";
 	private String tagCode;
-	private static final String TAG_BUYING = "buying";
-	private static final String TAG_Selling = "selling";
+	private static final String TAG_BUYING = "buy_cash";
+	private static final String TAG_Selling = "sell_cash";
 	private static final String TAG_CURRENCIES = "currencies";
 	private Context cont;
 	private ArrayList<Pair< Pair< Pair<String,String>, String>, String> > qoutes;
@@ -167,7 +167,6 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	protected Void doInBackground(Void... params) {
 		ServiceHandler sh = new ServiceHandler();
         String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-        Log.d("jsonStr",jsonStr); 
         if (jsonStr != null) {
             try {
             	dialogShouldShow = false;
@@ -181,13 +180,13 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
                     try{
                         JSONObject code = null;
                     	if(tagCode.equals("eur")){
-                    		if(currencies.has(tagCode)){
-                            	code = currencies.getJSONObject(tagCode);
-                    		}else if(currencies.has("euro")){
-                            	code = currencies.getJSONObject("euro");
+                    		if(currencies.has(tagCode.toUpperCase(Locale.getDefault()))){
+                            	code = currencies.getJSONObject(tagCode.toUpperCase(Locale.getDefault()));
+                    		}else if(currencies.has(new String("euro").toUpperCase(Locale.getDefault()))){
+                            	code = currencies.getJSONObject(new String("euro").toUpperCase(Locale.getDefault()));
                     		}
                     	}else{
-                        	code = currencies.getJSONObject(tagCode);
+                        	code = currencies.getJSONObject(tagCode.toUpperCase(Locale.getDefault()));
                     	}
                         String buyingAmount = code.getString(TAG_BUYING);
 	                    String sellingAmount = code.getString(TAG_Selling);
@@ -198,6 +197,7 @@ public class GetQoutes extends AsyncTask<Void, Void, Void>{
 	                    dialogShouldShowError = false;
 	                    dialogHasShownError = false;
                     }catch(Exception ex){
+                    	Log.e("exception", ex.getMessage());
                     	continue;
                     }
                 }
