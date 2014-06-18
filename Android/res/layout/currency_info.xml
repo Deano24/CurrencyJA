@@ -2,39 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	    android:paddingLeft="@dimen/activity_pad_left"
-    >
+    android:background="@drawable/border_bottom"
+	android:paddingLeft="@dimen/activity_pad_left"
+	android:paddingRight="@dimen/activity_pad_right">
 
     <TextView
         android:id="@+id/placeNameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-		android:layout_weight="1"
+		android:layout_weight=".7"
 		android:minEms="20"
 		android:maxEms="20"
-		android:ems="20"
-         />
+		android:ems="20"/>
 
     <TextView
         android:id="@+id/buyingPlaceTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 		android:layout_weight="1"
 	    android:gravity="center"
 		android:minEms="20"
 		android:maxEms="20"
-		android:ems="20"
-        />
+		android:ems="20"/>
 
     <TextView
         android:id="@+id/sellingPlaceTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 	    android:gravity="center"
 		android:layout_weight="1"
 		android:minEms="20"
 		android:maxEms="20"
-		android:ems="20"
-         />
+		android:ems="20"/>
 
 </LinearLayout>

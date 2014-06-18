@@ -1,5 +1,10 @@
 package com.herokuapp.currencyja;
 
+import com.herokuapp.fragments.CADFragment;
+import com.herokuapp.fragments.EURFragment;
+import com.herokuapp.fragments.GBPFragment;
+import com.herokuapp.fragments.USDFragment;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

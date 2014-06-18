@@ -5,15 +5,12 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import com.herokuapp.classes.InternetConnection;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
@@ -28,7 +25,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	private ActionBar actionBar;
 	private ViewPager viewPager;
-	private ConnectivityManager mConnectivityManager;
 	private String[] tabNames = { "USD", "GBP", "CAD", "EUR" };
 	private SharedPreferences chosenTheme;
 	private static final String THEME = "THEME";
@@ -43,21 +39,16 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mConnectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
-		boolean notConnection = true;
-		if(mConnectivityManager!=null)
-        {
-            NetworkInfo[] info = mConnectivityManager.getAllNetworkInfo();
-            if (info != null){
-            	for (int i = 0; i < info.length; i++){
-                	if (info[i].getState() == NetworkInfo.State.CONNECTED)
-                    {
-                		notConnection = false;
-                        break;
-                    }
-                }
-            }
-        }
+		if(!InternetConnection.isConnected(MainActivity.this) ){
+			new AlertDialog.Builder(this)
+		    .setTitle("Internet Connectivity")
+		    .setMessage("No internet connection could be found. Please connect to the internet and try again.")
+		    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+		    	public void onClick(DialogInterface dialog, int which) {}
+            })
+		     .show();
+			finish();
+		}
 	    chosenTheme = getSharedPreferences("currenncyThemes", MODE_PRIVATE);
 		selectedTheme = chosenTheme.getInt(THEME, 0);
 		switch(selectedTheme){
@@ -78,34 +69,17 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		setContentView(R.layout.activity_main);
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		viewPager.setOffscreenPageLimit(4);
-		if(notConnection){
-			new AlertDialog.Builder(this)
-		    .setTitle("Internet Connectivity")
-		    .setMessage("No internet connection could be found.")
-		    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-		    	public void onClick(DialogInterface dialog, int which) {}
-            })
-		     .show();
-			return;
-		}
 		viewPager.setAdapter(new TabAdapter(getSupportFragmentManager()));
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
 
 			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void onPageScrollStateChanged(int arg0) {}
 
 			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void onPageScrolled(int arg0, float arg1, int arg2) {}
 
 			@Override
 			public void onPageSelected(int position) {
-				// TODO Auto-generated method stub
 				actionBar.setSelectedNavigationItem(position);
 			}
 			
@@ -149,10 +123,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	 * @param ft the fragment transaction/operations.
 	 */
 	@Override
-	public void onTabReselected(Tab tab,
-			android.support.v4.app.FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-	}
+	public void onTabReselected(Tab tab,android.support.v4.app.FragmentTransaction ft) {}
 	
 	/**
 	 * function that creates the menu options
@@ -161,32 +132,15 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	/**
-	 * the click event for menu items
-	 * @param item the menu item that was clicked
-	 */
-	/*@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
-			switch(item.getItemId()){
-				case R.id.action_change_screen:
-					changeTheme();
-					return true;
-			}
-			return false;
-	}*/
 	
 	/**
 	 * function that changes theme to next available theme -->currently commented out due to errors
 	 */
 	public void changeTheme(){
 		SharedPreferences.Editor preferencesEditor = chosenTheme.edit();
-		//Log.d("theme","changing theme "+selectedTheme);
 		for(int i = 0; i < listOfThemes.length; i++){
 			if(listOfThemes[i] == selectedTheme && i+1 == listOfThemes.length){
 				selectedTheme = listOfThemes[0];

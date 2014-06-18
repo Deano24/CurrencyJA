@@ -796,6 +796,7 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f07000f;
         public static final int activity_pad_left=0x7f070011;
+        public static final int activity_pad_right=0x7f070012;
         public static final int activity_vertical_margin=0x7f070010;
     }
     public static final class drawable {
@@ -911,10 +912,10 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
-        public static final int ic_launcher=0x7f020070;
+        public static final int border_bottom=0x7f020070;
+        public static final int ic_launcher=0x7f020071;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f040036;
         public static final int abs__action_bar=0x7f040020;
         public static final int abs__action_bar_container=0x7f04001f;
         public static final int abs__action_bar_subtitle=0x7f040011;
@@ -954,28 +955,27 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f04003f;
-        public static final int amountEditText=0x7f040037;
+        public static final int action_settings=0x7f04003d;
+        public static final int amountEditText=0x7f040036;
         public static final int buyingPlaceTextView=0x7f040034;
-        public static final int buyingTextView=0x7f040039;
-        public static final int deanoTextView=0x7f04003e;
+        public static final int buyingTextView=0x7f040038;
+        public static final int deanoTextView=0x7f04003c;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040026;
         public static final int homeAsUp=0x7f040006;
-        public static final int itemsLinearLayout=0x7f04003c;
-        public static final int kenrickTextView=0x7f04003d;
+        public static final int itemsLinearLayout=0x7f04003a;
+        public static final int kenrickTextView=0x7f04003b;
         public static final int listMode=0x7f040002;
         public static final int normal=0x7f040001;
         public static final int pager=0x7f040032;
         public static final int placeNameTextView=0x7f040033;
-        public static final int scrollView1=0x7f04003b;
         public static final int sellingPlaceTextView=0x7f040035;
-        public static final int sellingTextView=0x7f04003a;
+        public static final int sellingTextView=0x7f040039;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
         public static final int tabMode=0x7f040003;
-        public static final int traderTextView=0x7f040038;
+        public static final int traderTextView=0x7f040037;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
     }
